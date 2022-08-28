@@ -1,12 +1,55 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Div Test Api",
+        "title": "DivApi Docs",
+        "description": "Документация для api",
         "version": "1.0.0"
     },
-    "paths": {
-        "/": {
-            "$ref": "localhost:8000"
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "API/V1"
         }
-    }
+    ],
+    "paths": {
+        "/requests": {
+            "post": {
+                "tags": [
+                    "Requests"
+                ],
+                "summary": "Отправка заявки пользователем",
+                "description": "Метод возвращает данные ...",
+                "operationId": "index",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Request"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Request": {
+                "title": "Request",
+                "description": "Request model",
+                "xml": {
+                    "name": "Request"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Requests",
+            "description": "Работа с заявками"
+        }
+    ]
 }

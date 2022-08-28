@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Mail;
 
 class RequestController extends Controller
 {
+    /**
+     * @OA\Post(
+     *      path="/requests",
+     *      operationId="index",
+     *      tags={"Requests"},
+     *      summary="Отправка заявки пользователем",
+     *      description="Метод возвращает данные ...",
+     *     @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *     @OA\JsonContent(ref="#/components/schemas/Request")
+     *       ),
+     *     )
+     */
+
     public function index(AddingRequest $request)
     {
         $response = \App\Models\Request::create($request->validated());
