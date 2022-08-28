@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/requests', [\App\Http\Controllers\Api\V1\RequestController::class, 'index']);
+
 Route::get('/requests', [\App\Http\Controllers\Api\V1\RequestController::class, 'getAllRequests']);
 Route::put('/requests/{id}', [\App\Http\Controllers\Api\V1\RequestController::class, 'postAnswer']);
