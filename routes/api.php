@@ -19,6 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/requests', [\App\Http\Controllers\Api\V1\RequestController::class, 'index']);
+Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
 
-Route::get('/requests', [\App\Http\Controllers\Api\V1\RequestController::class, 'getAllRequests']);
-Route::put('/requests/{id}', [\App\Http\Controllers\Api\V1\RequestController::class, 'postAnswer']);
+Route::group(['middleware' => 'jwt.verify'], function (){
+    Route::get('/requests', [\App\Http\Controllers\Api\V1\RequestController::class, 'getAllRequests']);
+    Route::put('/requests/{id}', [\App\Http\Controllers\Api\V1\RequestController::class, 'postAnswer']);
+});
