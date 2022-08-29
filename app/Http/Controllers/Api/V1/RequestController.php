@@ -61,7 +61,7 @@ class RequestController extends Controller
     /**
      * @OA\Get(
      *     path="/api/v1/requests",
-     *     summary="Получение заявок",
+     *     summary="Получение заявок (Нужен токен)",
      *     tags={"Заявки"},
      *     @OA\Parameter(
      *          in="path",
@@ -91,6 +91,10 @@ class RequestController extends Controller
             return response()->json(RequestResource::collection(\App\Models\Request::select()->
             where('status', $request->get('status'))->
             get()));
+        } elseif ($request->has('order')) {
+            return response()->json(RequestResource::collection(\App\Models\Request::select()->
+            orderBy('created_at', $request->get('order'))->
+            get()));
         } else {
             return RequestResource::collection(\App\Models\Request::all());
         }
@@ -99,7 +103,7 @@ class RequestController extends Controller
     /**
      * @OA\Post(
      *     path="/api/v1/requests/{id}",
-     *     summary="Добавление ответа к заявке",
+     *     summary="Добавление ответа к заявке (Нужен токен)",
      *     tags={"Заявки"},
      *     @OA\RequestBody(
      *          required=true,

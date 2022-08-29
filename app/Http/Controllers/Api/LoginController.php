@@ -10,7 +10,7 @@ class LoginController extends Controller
     /**
      * @OA\Post(
      *     path="/api/v1/login",
-     *     summary="Авторизация",
+     *     summary="Авторизация (Получение токена)",
      *     tags={"Авторизация"},
      *     @OA\RequestBody(
      *          required=true,

@@ -10,7 +10,7 @@
                 "tags": [
                     "Авторизация"
                 ],
-                "summary": "Авторизация",
+                "summary": "Авторизация (Получение токена)",
                 "operationId": "c075bf634b883673f2db1beebaab9d1f",
                 "requestBody": {
                     "required": true,
@@ -48,7 +48,7 @@
                 "tags": [
                     "Заявки"
                 ],
-                "summary": "Получение заявок",
+                "summary": "Получение заявок (Нужен токен)",
                 "operationId": "bd962e3ca0e1a519aa5b180da9b7bbf9",
                 "parameters": [
                     {
@@ -115,7 +115,7 @@
                 "tags": [
                     "Заявки"
                 ],
-                "summary": "Добавление ответа к заявке",
+                "summary": "Добавление ответа к заявке (Нужен токен)",
                 "operationId": "7024a967cac2a312857e8138848d2d5e",
                 "requestBody": {
                     "required": true,
