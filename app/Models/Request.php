@@ -29,21 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Request whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-
-/**
- * @OA\Schema(
- *     title="Request",
- *     description="Request model",
- *     @OA\Xml(
- *         name="Request"
- *     )
- * )
- */
-
 class Request extends Model
 {
 
     use HasFactory;
+
     protected $fillable = [
         'name',
         'email',

@@ -11,24 +11,19 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     /**
-     * @OA\Info(
-     *      version="1.0.0",
-     *      title="DivApi Docs",
-     *      description="Документация для api",
-     * )
-     *
-     * @OA\Server(
-     *      url=L5_SWAGGER_CONST_HOST,
-     *      description="API/V1"
-     * )
-     *
-     * @OA\Tag(
-     *     name="Requests",
-     *     description="Работа с заявками"
+     * @OA\Swagger(
+     *      schemes={"http"},
+     *      host="localhost",
+     *      basePath="/api/v1",
+     *      @OA\Info(
+     *          title="DivApi",
+     *          version="1.0.0"
+     *      )
      * )
      */
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function __construct()
     {
         auth()->setDefaultDriver('api');

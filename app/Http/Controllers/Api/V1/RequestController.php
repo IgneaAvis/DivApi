@@ -14,17 +14,42 @@ class RequestController extends Controller
 {
     /**
      * @OA\Post(
-     *      path="/requests",
-     *      operationId="index",
-     *      tags={"Requests"},
-     *      summary="Отправка заявки пользователем",
-     *      description="Метод возвращает данные ...",
+     *     path="/api/v1/requests",
+     *     summary="Создание заявки",
+     *     tags={"Заявки"},
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  required={
+     *                      "name",
+     *                      "email",
+     *                      "message"
+     *                  },
+     *                  @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      example="Константин"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      example="kogrebenkin@gmail.com"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="message",
+     *                      type="string",
+     *                      example="Test message"
+     *                  )
+     *              )
+     *          )
+     *     ),
      *     @OA\Response(
      *          response=201,
-     *          description="Successful operation",
-     *     @OA\JsonContent(ref="#/components/schemas/Request")
-     *       ),
+     *          description="successful operation"
      *     )
+     * )
      */
 
     public function index(AddingRequest $request)
@@ -32,6 +57,28 @@ class RequestController extends Controller
         $response = \App\Models\Request::create($request->validated());
         return response()->json($response, 201);
     }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/requests",
+     *     summary="Получение заявок",
+     *     tags={"Заявки"},
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="status",
+     *          description="Статус заявки Resolved|Active",
+     *     ),
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="order",
+     *          description="Сортировка заявок",
+     *     ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *     )
+     * )
+     */
 
     public function getAllRequests(Request $request)
     {
@@ -48,6 +95,34 @@ class RequestController extends Controller
             return RequestResource::collection(\App\Models\Request::all());
         }
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/requests/{id}",
+     *     summary="Добавление ответа к заявке",
+     *     tags={"Заявки"},
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  required={
+     *                      "comment"
+     *                  },
+     *                  @OA\Property(
+     *                      property="comment",
+     *                      type="string",
+     *                      example="Test comment"
+     *                  )
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response=201,
+     *          description="successful operation"
+     *     )
+     * )
+     */
 
     public function postAnswer($id, PostAnswerRequest $request)
     {

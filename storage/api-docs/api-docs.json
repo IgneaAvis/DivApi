@@ -1,55 +1,147 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "DivApi Docs",
-        "description": "Документация для api",
+        "title": "DivApi",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "http://my-default-host.com",
-            "description": "API/V1"
-        }
-    ],
     "paths": {
-        "/requests": {
+        "/api/v1/login": {
             "post": {
                 "tags": [
-                    "Requests"
+                    "Авторизация"
                 ],
-                "summary": "Отправка заявки пользователем",
-                "description": "Метод возвращает данные ...",
-                "operationId": "index",
-                "responses": {
-                    "201": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Request"
-                                }
+                "summary": "Авторизация",
+                "operationId": "c075bf634b883673f2db1beebaab9d1f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "test@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "testpassword123"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/requests": {
+            "get": {
+                "tags": [
+                    "Заявки"
+                ],
+                "summary": "Получение заявок",
+                "operationId": "bd962e3ca0e1a519aa5b180da9b7bbf9",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "description": "Статус заявки Resolved|Active"
+                    },
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Сортировка заявок"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Заявки"
+                ],
+                "summary": "Создание заявки",
+                "operationId": "cf4f111fab151f77106c2b0016628dae",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "message"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Константин"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "kogrebenkin@gmail.com"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Test message"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/requests/{id}": {
+            "post": {
+                "tags": [
+                    "Заявки"
+                ],
+                "summary": "Добавление ответа к заявке",
+                "operationId": "7024a967cac2a312857e8138848d2d5e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comment"
+                                ],
+                                "properties": {
+                                    "comment": {
+                                        "type": "string",
+                                        "example": "Test comment"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
                     }
                 }
             }
         }
-    },
-    "components": {
-        "schemas": {
-            "Request": {
-                "title": "Request",
-                "description": "Request model",
-                "xml": {
-                    "name": "Request"
-                }
-            }
-        }
-    },
-    "tags": [
-        {
-            "name": "Requests",
-            "description": "Работа с заявками"
-        }
-    ]
+    }
 }

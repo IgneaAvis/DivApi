@@ -7,6 +7,39 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    /**
+     * @OA\Post(
+     *     path="/api/v1/login",
+     *     summary="Авторизация",
+     *     tags={"Авторизация"},
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  required={
+     *                      "email",
+     *                      "password"
+     *                  },
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      example="test@gmail.com"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string",
+     *                      example="testpassword123"
+     *                  )
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response=201,
+     *          description="successful operation"
+     *     )
+     * )
+     */
     public function login(Request $request)
     {
         $creds = $request->only(['email', 'password']);
