@@ -64,6 +64,12 @@ class RequestController extends Controller
      *     summary="Получение заявок (Нужен токен)",
      *     tags={"Заявки"},
      *     @OA\Parameter(
+     *          in="header",
+     *          name="api_key",
+     *          description="Ваш api token",
+     *          required=true
+     *     ),
+     *     @OA\Parameter(
      *          in="path",
      *          name="status",
      *          description="Статус заявки Resolved|Active",
@@ -105,6 +111,18 @@ class RequestController extends Controller
      *     path="/api/v1/requests/{id}",
      *     summary="Добавление ответа к заявке (Нужен токен)",
      *     tags={"Заявки"},
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          description="Id заявки",
+     *          example=1
+     *     ),
+     *     @OA\Parameter(
+     *          in="header",
+     *          name="api_key",
+     *          description="Ваш api token",
+     *          required=true
+     *     ),
      *     @OA\RequestBody(
      *          required=true,
      *          @OA\MediaType(
